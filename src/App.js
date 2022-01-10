@@ -2,12 +2,13 @@ import React from 'react';
 import "./App.css";
 import Contact from "./component/Contact";
 import FormComp from "./component/FormComp";
+import {addInfo} from "./utils/functions"
 
 const initialValue = {userName : '', phoneNumber : "", email : ""}
 function App() {
   const handleSubmit =(e)=>{
     e.preventDefault()
-    console.log(info);
+    addInfo(info);
   }
 
   const [info,setInfo] = React.useState(initialValue)
