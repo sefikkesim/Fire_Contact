@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import firebase from "./firebase"
-import {getDatabase,ref,set,push,onValue,query} from "firebase/database"
+import {getDatabase,ref,set,push,onValue,query,remove,child,update} from "firebase/database"
+import {successNote} from "./customToastify"
 
 export const addInfo=(info)=>{
     const db = getDatabase()
@@ -11,12 +12,12 @@ export const addInfo=(info)=>{
         phoneNumber : info.phoneNumber,
         email : info.email
     })
-    console.log("veri eklendi");
+    successNote("Successfully Added")
 }
 
 export const useFetch =()=>{
     const [contacts,setContacts] = useState()
-    const [isLoading,setIsLoading] = useState();
+    const [isLoading,setIsLoading] = useState(false);
     useEffect(() => {
       setIsLoading(true);
 
@@ -36,3 +37,19 @@ export const useFetch =()=>{
     }, []);
     return { isLoading, contacts };
 }
+
+export const deleteContact = (id)=>{
+
+  const db = getDatabase()
+  remove(ref(db,"contact/"+id))
+  successNote("Successfully Deleted")
+
+}
+
+export const editContact = (info) => {
+  const db = getDatabase();
+  const newUserKey = push(child(ref(db), "contact/")).key;
+  const updates = {};
+  updates["contact/" + newUserKey] = info;
+  return update(ref(db), updates);
+};

@@ -1,7 +1,7 @@
 import React from "react";
 import { Table, Icon } from "semantic-ui-react";
-import { useFetch } from "../utils/functions";
-const Contact = () => {
+import { useFetch,deleteContact,editContact} from "../utils/functions";
+const Contact = ({editHandler}) => {
   const { isLoading, contacts } = useFetch();
   console.log(contacts);
   return (
@@ -36,30 +36,33 @@ const Contact = () => {
             contacts?.map((contact, index) => (
               <Table.Row key={index}>
                 <Table.Cell textAlign="center">
-                  {contact.username.toUpperCase()}
+                  {contact.userName}
                 </Table.Cell>
                 <Table.Cell textAlign="center">
                   {contact.phoneNumber}
                 </Table.Cell>
-                <Table.Cell textAlign="center">{contact.gender}</Table.Cell>
+                <Table.Cell textAlign="center">{contact.email}</Table.Cell>
                 <Table.Cell
                   textAlign="center"
                   className="delete"
-                  onClick={null}
+                  onClick={()=>deleteContact(contact.id)}
                 >
                   <Icon name="delete" />
                 </Table.Cell>
                 <Table.Cell
                   textAlign="center"
                   className="edit"
-                  onClick={() => null}
+                  onClick={() => (editHandler(contact.userName,
+                  contact.phoneNumber,
+                  contact.email,
+                  contact.id))}
                 >
                   <Icon name="edit" />
                 </Table.Cell>
               </Table.Row>
             ))
           )}
-          )
+          
         </Table.Body>
       </Table>
     </div>

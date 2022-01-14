@@ -1,5 +1,5 @@
 import React from 'react'
-import {Grid,Form,Segment,Button} from "semantic-ui-react"
+import {Grid,Form,Segment,Button,Icon} from "semantic-ui-react"
 
 const FormComp = ({ info, setInfo, handleSubmit }) => {
   const handleInputChange = (e) => {
@@ -12,14 +12,13 @@ const FormComp = ({ info, setInfo, handleSubmit }) => {
         <div className="ui piled segments">
           <div className="ui segment brand">
             <a
-              href="https://github.com/clarusway"
+              href="https://github.com/sefikkesim"
               className="design"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <code>{"<Clarusway/> "}</code>
+              <code>{"Fire Contact"}</code>
             </a>
-            <span className="design header">design</span>
           </div>
         </div>
         <h2 className="contact-header">Add Contact</h2>
@@ -35,6 +34,7 @@ const FormComp = ({ info, setInfo, handleSubmit }) => {
               onChange={handleInputChange}
               required
             />
+            <Icon name= "user"/>
             <Form.Input
               fluid
               name="phoneNumber"
